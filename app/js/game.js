@@ -5,6 +5,9 @@ BubbleShoot.Game = (function($) {
   var Game = function() {
     var curBubble;
     var board;
+    //store number of bubbles user has fired/ used
+    var numBubbles;
+    var MAX_BUBBLES = 70;
 
     this.init = function() {
       $('.but_start_game').bind('click', startGame);
@@ -12,6 +15,8 @@ BubbleShoot.Game = (function($) {
 
     var startGame = function() {
       $('.but_start_game').unbind('click');
+      //beginning of game number of bubbles left is at MAX
+      numBubbles = MAX_BUBBLES;
       BubbleShoot.ui.hideDialog();
       curBubble = getNextBubble();
       board = new BubbleShoot.Board();
@@ -23,6 +28,9 @@ BubbleShoot.Game = (function($) {
       var bubble = BubbleShoot.Bubble.create();
       bubble.getSprite().addClass('cur_bubble');
       $('#board').append(bubble.getSprite());
+      //display the number of remaining bubbles in the game
+      BubbleShoot.ui.drawBubblesRemaining(numBubbles);
+      numBubbles--;
       return bubble;
     };
 
@@ -41,6 +49,8 @@ BubbleShoot.Game = (function($) {
       };
 
       BubbleShoot.ui.fireBubble(curBubble, coords, duration);
+      //call this function each time a bubble is fired to prepare a new one
+      curBubble = getNextBubble();
     };
   };
   return Game;
