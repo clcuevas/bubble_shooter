@@ -72,6 +72,9 @@ BubbleShoot.ui = (function($) {
           }
         }
       }
+    },
+    drawBubblesRemaining: function(numBubbles) {
+      $('#bubbles_remaining').text(numBubbles);
     }
   };
   return ui;
