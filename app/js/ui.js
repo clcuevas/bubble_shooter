@@ -66,7 +66,7 @@ BubbleShoot.ui = (function($) {
             var sprite = bubble.getSprite();
             gameArea.append(sprite);
             var left = j * ui.BUBBLE_DIMS / 2;
-            var right = i * ui.ROW_HEIGHT;
+            var top = i * ui.ROW_HEIGHT;
             //assign the bubble's position
             sprite.css({left: left, top: top});
           }

@@ -22,11 +22,13 @@ BubbleShoot.Bubble = (function($) {
       return row;
     };
   };
+
   Bubble.create = function(rowNum, colNum, type) {
     if (type === undefined) {
       //bubble type classes are between bubble_0 through bubble_3
       type = Math.floor(Math.random() * 4);
     }
+
     var sprite = $(document.createElement('div'));
     sprite.addClass('bubble');
     //bubble type classes are between bubble_0 through bubble_3
