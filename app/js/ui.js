@@ -5,6 +5,7 @@ BubbleShoot.ui = (function($) {
   var ui = {
     //this is the width and height of a bubble sprite in the DOM
     BUBBLE_DIMS: 44,
+    ROW_HEIGHT: 40,
     init: function() {
 
     },
@@ -50,6 +51,27 @@ BubbleShoot.ui = (function($) {
         duration: duration,
         easing: 'linear'
       });
+    },
+    drawBoard: function(board) {
+      var rows = board.getRows();
+      var gameArea = $('#board');
+
+      for (var i = 0; i < rows.length; i++) {
+        var row = rows[i];
+
+        for (var j = 0; j < row.length; j++) {
+          var bubble = row[j];
+
+          if (bubble) {
+            var sprite = bubble.getSprite();
+            gameArea.append(sprite);
+            var left = j * ui.BUBBLE_DIMS / 2;
+            var top = i * ui.ROW_HEIGHT;
+            //assign the bubble's position
+            sprite.css({left: left, top: top});
+          }
+        }
+      }
     }
   };
   return ui;
