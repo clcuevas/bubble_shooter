@@ -1,0 +1,23 @@
+{
+  "name": "bubble_shooter",
+  "version": "0.1.0",
+  "description": "Bubble Sort HTML5 Game",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clcuevas/bubble_shooter.git"
+  },
+  "author": "omordn@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/clcuevas/bubble_shooter/issues"
+  },
+  "homepage": "https://github.com/clcuevas/bubble_shooter",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
