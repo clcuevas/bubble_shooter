@@ -45,6 +45,7 @@ BubbleShoot.Game = (function($) {
       if (collision) {
         var coords = collision.coords;
         duration = Math.round(duration * collision.distToCollision / distance);
+        board.addBubble(curBubble, coords);
       } else {
         var distX = Math.sin(angle) * distance;
         var distY = Math.cos(angle) * distance;
