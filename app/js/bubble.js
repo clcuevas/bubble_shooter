@@ -18,8 +18,16 @@ BubbleShoot.Bubble = (function($) {
       return col;
     };
 
+    this.setCol = function(colIn) {
+      col = colIn;
+    };
+
     this.getRow = function() {
       return row;
+    };
+
+    this.setRow = function(rowIn) {
+      row = rowIn;
     };
 
     this.getCoords = function() {

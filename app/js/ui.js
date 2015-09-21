@@ -49,7 +49,15 @@ BubbleShoot.ui = (function($) {
       },
       {
         duration: duration,
-        easing: 'linear'
+        easing: 'linear',
+        complete: function() {
+          if (bubble.getRow() !== null) {
+            bubble.getSprite().css({
+              left: bubble.getCoords().left - ui.BUBBLE_DIMS / 2,
+              top: bubble.getCoords().top - ui.BUBBLE_DIMS / 2
+            });
+          }
+        }
       });
     },
     drawBoard: function(board) {
