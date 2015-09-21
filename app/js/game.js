@@ -46,6 +46,12 @@ BubbleShoot.Game = (function($) {
         var coords = collision.coords;
         duration = Math.round(duration * collision.distToCollision / distance);
         board.addBubble(curBubble, coords);
+
+        var group = board.getGroup(curBubble, {});
+
+        if (group.list.length >= 3) {
+          popBubbles(group.list, duration);
+        }
       } else {
         var distX = Math.sin(angle) * distance;
         var distY = Math.cos(angle) * distance;
@@ -60,6 +66,17 @@ BubbleShoot.Game = (function($) {
       BubbleShoot.ui.fireBubble(curBubble, coords, duration);
       //call this function each time a bubble is fired to prepare a new one
       curBubble = getNextBubble();
+    };
+
+    var popBubbles = function(bubbles, delay) {
+      $.each(bubbles, function() {
+        var bubble = this;
+
+        board.popBubbleAt(this.getRow(), this.getCol());
+        setTimeout(function() {
+          bubble.getSprite().remove();
+        }, delay + 200);
+      });
     };
   };
   return Game;
