@@ -21,6 +21,15 @@ BubbleShoot.Bubble = (function($) {
     this.getRow = function() {
       return row;
     };
+
+    this.getCoords = function() {
+      //the x-coordinate is left, and the y-coordinate is top
+      var coords = {
+        left: that.getCol() * BubbleShoot.ui.BUBBLE_DIMS / 2 + BubbleShoot.ui.BUBBLE_DIMS / 2,
+        top: that.getRow() * BubbleShoot.ui.ROW_HEIGHT + BubbleShoot.ui.BUBBLE_DIMS / 2
+      };
+      return coords;
+    };
   };
 
   Bubble.create = function(rowNum, colNum, type) {
