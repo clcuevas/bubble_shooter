@@ -32,6 +32,70 @@ BubbleShoot.Board = (function($) {
         bubble.setCol(colNum);
       }
     };
+
+    this.getBubbleAt = function(rowNum, colNum) {
+      if (!this.getRows()[rowNum]) {
+        return null;
+      }
+      return this.getRows()[rowNum][colNum];
+    };
+
+    this.getBubblesAround = function(curRow, curCol) {
+      var bubbles = [];
+
+      for (var rowNum = curRow - 1; rowNum <= curRow + 1; rowNum++) {
+
+        for (var colNum = curCol - 2; colNum <= curCol + 2; colNum++) {
+          var bubbleAt = that.getBubbleAt(rowNum, colNum);
+
+          if (bubbleAt && !(colNum == curCol && rowNum == curRow)) {
+            bubbles.push(bubbleAt);
+          }
+        }
+      }
+      return bubbles;
+    };
+
+    this.getGroup = function(bubble, found) {
+      var curRow = bubble.getRow();
+
+      //check to see if this bubble has already been found
+      if (!found[curRow]) {
+        found[curRow] = {};
+      }
+
+      if (!found.list) {
+        found.list = [];
+      }
+
+      //return the found object without creating it again if found
+      if (found[curRow][bubble.getCol()]) {
+        return found;
+      }
+
+      found[curRow][bubble.getCol()] = bubble;
+      //store bubble in the found list
+      found.list.push(bubble);
+      var curCol = bubble.getCol();
+      var surrounding = that.getBubblesAround(curRow, curCol);
+
+      //check for a color match
+      for (var i = 0; i < surrounding.length; i++) {
+        var bubbleAt = surrounding[i];
+
+        //this verifies color matches
+        if (bubbleAt.getType() == bubble.getType()) {
+          found = that.getGroup(bubbleAt, found);
+        }
+      }
+      return found;
+    };
+
+    this.popBubbleAt = function(rowNum, colNum) {
+      var row = rows[rowNum];
+      delete row[colNum];
+    };
+
     return this;
   };
 
